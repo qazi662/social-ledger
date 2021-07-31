@@ -1,40 +1,37 @@
 // libraries
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
 // firebase
-// import firebase from "../utils/firebase";
-// import "firebase/auth";
+import firebase from "../utils/firebase";
+import "firebase/auth";
 
 // context
 import AuthContext from "./AuthProvider";
 
 // stacks
 import AuthStack from "./AuthStack";
-// import AppStack from "./AppStack";
-
-// to delete
-import LandingScreen from "../screens/Auth/LandingScreen";
+import AppStack from "./AppStack";
 
 const Routes = () => {
-  const { user, setUser } = React.useContext(AuthContext);
-  const [initializing, setInitializing] = React.useState(true);
+  const { user, setUser } = useContext(AuthContext);
+  const [initializing, setInitializing] = useState(true);
 
-  // const onAuthStateChanged = (user) => {
-  //   setUser(user);
-  //   if (initializing) setInitializing(false);
-  // };
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  };
 
-  // React.useEffect(() => {
-  //   const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-  //   return subscriber;
-  // }, []);
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
 
-  // if (initializing) return null;
+  if (initializing) return null;
 
   return (
     <NavigationContainer>
-      {user ? <LandingScreen /> : <AuthStack />}
+      {user ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

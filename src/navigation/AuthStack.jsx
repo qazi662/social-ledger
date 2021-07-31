@@ -9,10 +9,10 @@ import { primaryColor, textColor } from "../assets/colors";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 // screens
-// import SignupScreen from "../screens/Auth/SignupScreen";
 import LandingScreen from "../screens/Auth/LandingScreen";
 import OnboardingScreen from "../screens/Auth/OnboardingScreen";
 import PhoneNumberScreen from "../screens/Auth/PhoneNumberScreen";
+import VerificationScreen from "../screens/Auth/VerificationScreen";
 
 // stack nav
 const Stack = createStackNavigator();
@@ -53,11 +53,6 @@ const AuthStack = () => {
         component={LandingScreen}
         options={{ header: () => null }}
       />
-      {/* <Stack.Screen
-        name='Signup'
-        component={SignupScreen}
-        options={{ header: () => null }}
-      /> */}
       <Stack.Screen
         name='PhoneNumber'
         component={PhoneNumberScreen}
@@ -74,6 +69,27 @@ const AuthStack = () => {
                 size={25}
                 color={textColor}
                 onPress={() => navigation.navigate("Landing")}
+              />
+            </View>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name='VerificationScreen'
+        component={VerificationScreen}
+        options={({ navigation }) => ({
+          title: "Enter Verification Code",
+          headerTintColor: textColor,
+          headerStyle: {
+            backgroundColor: primaryColor,
+          },
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <AntDesign
+                name='left'
+                size={25}
+                color={textColor}
+                onPress={() => navigation.navigate("PhoneNumber")}
               />
             </View>
           ),

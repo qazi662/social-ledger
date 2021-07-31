@@ -2,9 +2,7 @@
 import React, { createContext, useState } from "react";
 
 // firebase
-// import firebase from "../utils/firebase";
-// import "firebase/firestore";
-// import "firebase/auth";
+import firebase from "../utils/firebase";
 
 // context
 const AuthContext = createContext();
@@ -12,57 +10,26 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // states
   const [user, setUser] = useState(null);
+  const [verificationId, setVerificationId] = useState();
+  const [verificationCode, setVerificationCode] = useState();
 
   return (
     <AuthContext.Provider
       value={{
         user,
         setUser,
-        // login: async (email, password) => {
-        //   try {
-        //     await firebase.auth().signInWithEmailAndPassword(email, password);
-        //   } catch (e) {
-        //     console.log(e);
-        //   }
-        // },
-        // register: async (email, password) => {
-        //   try {
-        //     await firebase
-        //       .auth()
-        //       .createUserWithEmailAndPassword(email, password)
-        //       .then(() => {
-        //         firebase
-        //           .firestore()
-        //           .collection("users")
-        //           .doc(auth().currentUser.uid)
-        //           .set({
-        //             fname: "",
-        //             lname: "",
-        //             email: email,
-        //             createdAt: firestore.Timestamp.fromDate(new Date()),
-        //             userImg: null,
-        //           })
-        //           .catch((error) => {
-        //             console.log(
-        //               "Something went wrong with added user to firestore: ",
-        //               error,
-        //             );
-        //           });
-        //       })
-        //       .catch((error) => {
-        //         console.log("Something went wrong with sign up: ", error);
-        //       });
-        //   } catch (e) {
-        //     console.log(e);
-        //   }
-        // },
-        // logout: async () => {
-        //   try {
-        //     await firebase.auth().signOut();
-        //   } catch (e) {
-        //     console.log(e);
-        //   }
-        // },
+        verificationId,
+        setVerificationId,
+        verificationCode,
+        setVerificationCode,
+
+        logout: async () => {
+          try {
+            await firebase.auth().signOut();
+          } catch (e) {
+            console.log(e);
+          }
+        },
       }}
     >
       {children}

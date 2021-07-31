@@ -1,7 +1,6 @@
 // libraries
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, Image, StyleSheet, ScrollView } from "react-native";
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import { useTheme } from "react-native-paper";
 
 // context
@@ -17,42 +16,31 @@ import { Button } from "react-native-paper";
 // colors
 import { primaryColor } from "../../assets/colors";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   // colors
   const { colors } = useTheme();
 
   // context
-  const { setVerificationId } = useContext(AuthContext);
+  const { verificationId, verificationCode, setVerificationCode } =
+    useContext(AuthContext);
 
   // states
-  const [phone, setPhone] = useState();
-  const firebaseConfig = firebase.apps.length
-    ? firebase.app().options
-    : undefined;
   const [loading, setLoading] = useState(false);
-
-  // ref
-  const recaptchaVerifier = React.useRef(null);
 
   return (
     <View style={styles.main}>
       <ScrollView contentContainerStyle={styles.container}>
-        <FirebaseRecaptchaVerifierModal
-          ref={recaptchaVerifier}
-          firebaseConfig={firebaseConfig}
-          attemptInvisibleVerification
-        />
         <Image
           source={require("../../assets/logo/logo.png")}
           style={styles.logo}
         />
         <Input
           autoFocus
-          labelValue={phone}
+          labelValue={verificationCode}
           autoCompleteType='tel'
-          onChangeText={(e) => setPhone(e)}
-          placeholderText='+1 999 999 999'
-          iconType='phone'
+          onChangeText={(e) => setVerificationCode(e)}
+          iconType='lock'
+          placeholderText='Enter verification code'
           textContentType='telephoneNumber'
           keyboardType='phone-pad'
         />
@@ -60,26 +48,24 @@ const LoginScreen = ({ navigation }) => {
           style={styles.button}
           loading={loading}
           color={colors.buttonBackground}
-          disabled={!phone}
+          disabled={!verificationCode}
           mode='contained'
           onPress={async () => {
             setLoading(true);
             try {
-              const phoneProvider = new firebase.auth.PhoneAuthProvider();
-              const verificationId = await phoneProvider.verifyPhoneNumber(
-                phone,
-                recaptchaVerifier.current,
+              const credential = firebase.auth.PhoneAuthProvider.credential(
+                verificationId,
+                verificationCode,
               );
-              setVerificationId(verificationId);
-              navigation.navigate("VerificationScreen");
+              await firebase.auth().signInWithCredential(credential);
               setLoading(false);
             } catch (err) {
-              alert(err.message);
               setLoading(false);
+              alert(err.messsage);
             }
           }}
         >
-          Send Verification Code
+          Verify
         </Button>
       </ScrollView>
     </View>

@@ -8,14 +8,18 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { useTheme } from "react-native-paper";
 
 // components
-import Button from "../../components/Forms/Button";
+import { Button } from "react-native-paper";
 
 // colors
 import { darkGrayColor, primaryColor, textColor } from "../../assets/colors";
 
 const LoginScreen = ({ navigation }) => {
+  // colors
+  const { colors } = useTheme();
+
   return (
     <View style={styles.main}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -26,10 +30,14 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.text}>
           Manage your business: Send reminders and receive payments!
         </Text>
+
         <Button
-          buttonTitle='Start using Social Ledger'
+          color={colors.buttonBackground}
+          mode='contained'
           onPress={() => navigation.navigate("PhoneNumber")}
-        />
+        >
+          Start using Social Ledger
+        </Button>
         <Text style={styles.disclaimer}>
           By logging in you agree to our{" "}
           <TouchableOpacity>
