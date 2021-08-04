@@ -5,3 +5,9 @@ export const textColor = "#ffffff";
 export const grayColor = "#cccccc";
 export const darkGrayColor = "#888888";
 export const accentColor = "#000300";
+
+export const secondaryDark = "#1A1A1C";
+export const secondayLight = "#151515";
+export const accentLight = "#38373C";
+export const textDark = "#69696B";
+export const greenColor = "#FDB966";

@@ -246,7 +246,8 @@ export default class Swiper extends Component {
           />
         ) : (
           // Or this one otherwise
-          <Button text='Continue' onPress={() => this.swipe()} />
+          // <Button text='Continue' onPress={() => this.swipe()} />
+          <Button text='Continue' onPress={() => this.props.navigation.replace("Landing")} />
         )}
       </View>
     );
