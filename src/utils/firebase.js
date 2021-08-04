@@ -1,4 +1,4 @@
-import * as firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import "firebase/firestore";
@@ -13,11 +13,18 @@ var firebaseConfig = {
   appId: "1:1004014402141:web:d7e271172e3bd16cc56bb4",
   measurementId: "G-D8GBBG08BR",
 };
+
 // Initialize Firebase
-if (firebase) {
-  if (firebase.initializeApp) {
-    firebase.initializeApp(firebaseConfig);
-  }
+// if (firebase) {
+//   if (firebase.initializeApp) {
+//     firebase.initializeApp(firebaseConfig);
+//   }
+// }
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
 }
 
 export default firebase;

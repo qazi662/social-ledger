@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 // components
 import Swiper from "../../components/Onboarding/Swiper";
 
-export default OnboardingScreen = ({ navigation }) => {
+const OnboardingScreen = ({ navigation }) => {
   return (
     <Swiper navigation={navigation}>
       {/* First screen */}
@@ -46,6 +46,8 @@ export default OnboardingScreen = ({ navigation }) => {
     </Swiper>
   );
 };
+
+export default OnboardingScreen;
 
 const styles = StyleSheet.create({
   // Slide styles
