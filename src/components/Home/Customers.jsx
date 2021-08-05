@@ -1,6 +1,6 @@
 // libraries
 import React from "react";
-import { Box, FlatList, Text, Icon } from "native-base";
+import { Box, FlatList, Text, Icon, Fab } from "native-base";
 
 // components
 import Item from "./Item";
@@ -8,21 +8,15 @@ import Item from "./Item";
 // assets
 import { secondayLight, textColor, textDark } from "../../assets/colors";
 
-// icons
-import { MaterialIcons } from "@expo/vector-icons";
-
-// mockup
-import mockup from "../../utils/data";
-
-const Customers = () => {
+const Customers = ({ customers }) => {
   return (
-    <Box bg={secondayLight} flex={1} pl={4} pt={4}>
+    <Box bg={secondayLight} h="100%" pl={4} pt={4}>
       <Text color={textDark} fontSize="sm">
-        {mockup.customers.length} Customers
+        {customers.length} Customers
       </Text>
       <FlatList
         mt={4}
-        data={mockup.customers}
+        data={customers}
         renderItem={({ item }) => <Item data={item} />}
         keyExtractor={(item) => item.id}
       />

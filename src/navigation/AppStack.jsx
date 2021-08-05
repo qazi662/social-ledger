@@ -20,6 +20,7 @@ import { View } from "react-native";
 import HomeScreen from "../screens/App/HomeScreen";
 import ProfileScreen from "../screens/App/Profile/ProfileScreen";
 import EditProfileScreen from "../screens/App/Profile/EditProfileScreen";
+import ContactScreen from "../screens/App/ContactScreen";
 // import ChatScreen from "../screens/ChatScreen";
 // import AddPostScreen from "../screens/AddPostScreen";
 // import MessagesScreen from "../screens/MessagesScreen";
@@ -31,7 +32,7 @@ const Tab = createBottomTabNavigator();
 const HomeStack = ({ navigation }) => (
   <Stack.Navigator>
     <Stack.Screen
-      name='Social Ledger'
+      name="Social Ledger"
       component={HomeScreen}
       options={{
         headerTitleAlign: "center",
@@ -47,13 +48,26 @@ const HomeStack = ({ navigation }) => (
         headerRight: () => (
           <View style={{ marginRight: 10 }}>
             <FontAwesome5
-              name='plus'
+              name="plus"
               size={16}
               color={textColor}
               // onPress={() => navigation.navigate("AddPost")}
             />
           </View>
         ),
+      }}
+    />
+    <Stack.Screen
+      name="Contact"
+      component={ContactScreen}
+      options={{
+        title: "",
+        headerTintColor: "white",
+        headerStyle: {
+          shadowColor: primaryColor,
+          elevation: 0,
+          backgroundColor: accentColor,
+        },
       }}
     />
     {/* <Stack.Screen
@@ -100,7 +114,7 @@ const HomeStack = ({ navigation }) => (
 const ProfileStack = ({ navigation }) => (
   <Stack.Navigator>
     <Stack.Screen
-      name='Profile'
+      name="Profile"
       component={ProfileScreen}
       options={{
         headerTitleAlign: "center",
@@ -116,7 +130,7 @@ const ProfileStack = ({ navigation }) => (
       }}
     />
     <Stack.Screen
-      name='EditProfile'
+      name="EditProfile"
       component={EditProfileScreen}
       options={{
         headerTitle: "Edit Profile",
@@ -161,20 +175,20 @@ const AppStack = () => {
       }}
     >
       <Tab.Screen
-        name='Home'
+        name="Home"
         component={HomeStack}
         options={() => ({
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name='home' color={color} size={20} />
+            <MaterialCommunityIcons name="home" color={color} size={20} />
           ),
         })}
       />
       <Tab.Screen
-        name='Profile'
+        name="Profile"
         component={ProfileStack}
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name='person' color={color} size={18} />
+            <Ionicons name="person" color={color} size={18} />
           ),
         }}
       />
