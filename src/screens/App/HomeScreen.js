@@ -1,7 +1,7 @@
 // libraries
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
-import { Box, Flex, NativeBaseProvider } from "native-base";
+import { Box, Flex } from "native-base";
 
 // components
 import SearchForm from "../../components/Home/SearchForm";
@@ -31,7 +31,6 @@ const HomeScreen = ({ navigation }) => {
 
   const handleSearch = (_value) => {
     if (_value !== "") {
-      console.log(_value);
       let filter = temp.filter(
         (item) => item.name.toLowerCase().indexOf(_value.toLowerCase()) !== -1
       );
@@ -46,31 +45,29 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <NativeBaseProvider>
-      <View style={styles.main}>
-        <ScrollView contentContainerStyle={styles.full}>
-          <Flex direction="column" h="100%">
-            <Box m={4}>
-              <SearchForm
-                isSearch={isSearch}
-                toggle={toggle}
-                handleSearch={handleSearch}
-              />
-            </Box>
-            <Box mx={4} mt={0} mb={3} style={isSearch && styles.hide}>
-              <ReportCard />
-            </Box>
-            <Box mx={4} style={isSearch && styles.hide}>
-              <Cashbook />
-            </Box>
-            <Box mt={4} flex={1}>
-              <Customers customers={customers} />
-            </Box>
-            <Fab handleClick={navigateTo} />
-          </Flex>
-        </ScrollView>
-      </View>
-    </NativeBaseProvider>
+    <View style={styles.main}>
+      <ScrollView contentContainerStyle={styles.full}>
+        <Flex direction="column" h="100%">
+          <Box m={4}>
+            <SearchForm
+              isSearch={isSearch}
+              toggle={toggle}
+              handleSearch={handleSearch}
+            />
+          </Box>
+          <Box mx={4} mt={0} mb={3} style={isSearch && styles.hide}>
+            <ReportCard />
+          </Box>
+          <Box mx={4} style={isSearch && styles.hide}>
+            <Cashbook />
+          </Box>
+          <Box mt={4} flex={1}>
+            <Customers customers={customers} />
+          </Box>
+          <Fab handleClick={navigateTo} />
+        </Flex>
+      </ScrollView>
+    </View>
   );
 };
 

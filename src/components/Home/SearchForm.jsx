@@ -10,7 +10,15 @@ import { accentLight, grayColor, textColor } from "../../assets/colors";
 // icons
 import { AntDesign } from "@expo/vector-icons";
 
-const SearchForm = ({ isSearch, toggle, handleSearch }) => {
+const SearchForm = ({ isSearch = false, toggle, handleSearch }) => {
+  const handleClick = (_check) => {
+    let check = toggle || nul;
+
+    if (check) {
+      toggle(_check);
+    }
+  };
+
   return (
     <Input
       w="100%"
@@ -35,11 +43,11 @@ const SearchForm = ({ isSearch, toggle, handleSearch }) => {
           size={!isSearch ? 5 : 6}
           color={grayColor}
           ml={2}
-          onPress={() => toggle(false)}
+          onPress={() => handleClick(false)}
           style={{ zIndex: 99 }}
         />
       }
-      onFocus={() => toggle(true)}
+      onFocus={() => handleClick(true)}
       onChangeText={handleSearch}
     />
   );

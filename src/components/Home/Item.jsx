@@ -16,6 +16,8 @@ import {
 
 // icons
 import { MaterialIcons } from "@expo/vector-icons";
+
+// utils
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 const Item = ({ data }) => {

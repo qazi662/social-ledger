@@ -3,6 +3,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "react-native-paper";
+import { NativeBaseProvider } from "native-base";
 
 // icons
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -30,47 +31,48 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeStack = ({ navigation }) => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Social Ledger"
-      component={HomeScreen}
-      options={{
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          color: textColor,
-          fontSize: 16,
-        },
-        headerStyle: {
-          shadowColor: primaryColor,
-          elevation: 0,
-          backgroundColor: accentColor,
-        },
-        headerRight: () => (
-          <View style={{ marginRight: 10 }}>
-            <FontAwesome5
-              name="plus"
-              size={16}
-              color={textColor}
-              // onPress={() => navigation.navigate("AddPost")}
-            />
-          </View>
-        ),
-      }}
-    />
-    <Stack.Screen
-      name="Contact"
-      component={ContactScreen}
-      options={{
-        title: "",
-        headerTintColor: "white",
-        headerStyle: {
-          shadowColor: primaryColor,
-          elevation: 0,
-          backgroundColor: accentColor,
-        },
-      }}
-    />
-    {/* <Stack.Screen
+  <NativeBaseProvider>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Social Ledger"
+        component={HomeScreen}
+        options={{
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            color: textColor,
+            fontSize: 16,
+          },
+          headerStyle: {
+            shadowColor: primaryColor,
+            elevation: 0,
+            backgroundColor: accentColor,
+          },
+          headerRight: () => (
+            <View style={{ marginRight: 10 }}>
+              <FontAwesome5
+                name="plus"
+                size={16}
+                color={textColor}
+                // onPress={() => navigation.navigate("AddPost")}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Contact"
+        component={ContactScreen}
+        options={{
+          title: "",
+          headerTintColor: "white",
+          headerStyle: {
+            shadowColor: primaryColor,
+            elevation: 0,
+            backgroundColor: accentColor,
+          },
+        }}
+      />
+      {/* <Stack.Screen
       name='AddPost'
       component={AddPostScreen}
       options={{
@@ -89,7 +91,7 @@ const HomeStack = ({ navigation }) => (
         ),
       }}
     /> */}
-    {/* <Stack.Screen
+      {/* <Stack.Screen
       name='HomeProfile'
       component={ProfileScreen}
       options={{
@@ -108,7 +110,8 @@ const HomeStack = ({ navigation }) => (
         ),
       }}
     /> */}
-  </Stack.Navigator>
+    </Stack.Navigator>
+  </NativeBaseProvider>
 );
 
 const ProfileStack = ({ navigation }) => (
