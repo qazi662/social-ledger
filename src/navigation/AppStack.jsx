@@ -22,10 +22,7 @@ import HomeScreen from "../screens/App/HomeScreen";
 import ProfileScreen from "../screens/App/Profile/ProfileScreen";
 import EditProfileScreen from "../screens/App/Profile/EditProfileScreen";
 import ContactScreen from "../screens/App/ContactScreen";
-// import ChatScreen from "../screens/ChatScreen";
-// import AddPostScreen from "../screens/AddPostScreen";
-// import MessagesScreen from "../screens/MessagesScreen";
-// import EditProfileScreen from "../screens/EditProfileScreen";
+import DetailsScreen from "../screens/App/DetailsScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,7 +31,7 @@ const HomeStack = ({ navigation }) => (
   <NativeBaseProvider>
     <Stack.Navigator>
       <Stack.Screen
-        name="Social Ledger"
+        name='Social Ledger'
         component={HomeScreen}
         options={{
           headerTitleAlign: "center",
@@ -47,20 +44,15 @@ const HomeStack = ({ navigation }) => (
             elevation: 0,
             backgroundColor: accentColor,
           },
-          headerRight: () => (
-            <View style={{ marginRight: 10 }}>
-              <FontAwesome5
-                name="plus"
-                size={16}
-                color={textColor}
-                // onPress={() => navigation.navigate("AddPost")}
-              />
-            </View>
-          ),
+          // headerRight: () => (
+          //   <View style={{ marginRight: 10 }}>
+          //     <FontAwesome5 name='plus' size={16} color={textColor} />
+          //   </View>
+          // ),
         }}
       />
       <Stack.Screen
-        name="Contact"
+        name='Contact'
         component={ContactScreen}
         options={{
           title: "",
@@ -70,7 +62,38 @@ const HomeStack = ({ navigation }) => (
             elevation: 0,
             backgroundColor: accentColor,
           },
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <AntDesign
+              name='left'
+              size={25}
+              color={textColor}
+              style={{ marginLeft: 10 }}
+            />
+          ),
         }}
+      />
+      <Stack.Screen
+        name='Details'
+        component={DetailsScreen}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerTintColor: "white",
+          headerStyle: {
+            shadowColor: primaryColor,
+            elevation: 0,
+            backgroundColor: accentColor,
+          },
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <AntDesign
+              name='left'
+              size={25}
+              color={textColor}
+              style={{ marginLeft: 10 }}
+            />
+          ),
+        })}
       />
       {/* <Stack.Screen
       name='AddPost'
@@ -117,7 +140,7 @@ const HomeStack = ({ navigation }) => (
 const ProfileStack = ({ navigation }) => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Profile"
+      name='Profile'
       component={ProfileScreen}
       options={{
         headerTitleAlign: "center",
@@ -133,7 +156,7 @@ const ProfileStack = ({ navigation }) => (
       }}
     />
     <Stack.Screen
-      name="EditProfile"
+      name='EditProfile'
       component={EditProfileScreen}
       options={{
         headerTitle: "Edit Profile",
@@ -178,20 +201,20 @@ const AppStack = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name='Home'
         component={HomeStack}
         options={() => ({
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={20} />
+            <MaterialCommunityIcons name='home' color={color} size={20} />
           ),
         })}
       />
       <Tab.Screen
-        name="Profile"
+        name='Profile'
         component={ProfileStack}
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name="person" color={color} size={18} />
+            <Ionicons name='person' color={color} size={18} />
           ),
         }}
       />

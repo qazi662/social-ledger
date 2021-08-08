@@ -11,3 +11,6 @@ export const secondayLight = "#151515";
 export const accentLight = "#38373C";
 export const textDark = "#69696B";
 export const greenColor = "#FDB966";
+
+export const deleteColor = "#d11a2a";
+export const successColor = "#4bb543";

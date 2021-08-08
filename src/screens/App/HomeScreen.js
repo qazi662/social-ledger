@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation }) => {
   const handleSearch = (_value) => {
     if (_value !== "") {
       let filter = temp.filter(
-        (item) => item.name.toLowerCase().indexOf(_value.toLowerCase()) !== -1
+        (item) => item.name.toLowerCase().indexOf(_value.toLowerCase()) !== -1,
       );
       setCustomers(filter);
     } else {
@@ -47,7 +47,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <ScrollView contentContainerStyle={styles.full}>
-        <Flex direction="column" h="100%">
+        <Flex direction='column' h='100%'>
           <Box m={4}>
             <SearchForm
               isSearch={isSearch}
