@@ -13,7 +13,7 @@ import { primaryColor } from "../../assets/colors";
 // mockup
 import mockup from "../../utils/data";
 
-const DetailsScreen = ({ navigation, route }) => {
+const DetailsScreen = ({ route }) => {
   // params
   const { id } = route.params;
 
@@ -40,7 +40,7 @@ const DetailsScreen = ({ navigation, route }) => {
   return (
     <Flex direction='column' height='100%' backgroundColor={primaryColor}>
       <Flex flexGrow={1} direction='column'>
-        <Stats amount={amount} />
+        <Stats amount={amount} data={data} />
         <List trades={data.trades} />
       </Flex>
       <ButtonsGroup />
