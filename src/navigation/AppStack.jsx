@@ -12,7 +12,12 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 // assets
-import { accentColor, primaryColor, textColor } from "../assets/colors";
+import {
+  accentColor,
+  grayColor,
+  primaryColor,
+  textColor,
+} from "../assets/colors";
 
 // components
 import { View } from "react-native";
@@ -23,124 +28,37 @@ import ProfileScreen from "../screens/App/Profile/ProfileScreen";
 import EditProfileScreen from "../screens/App/Profile/EditProfileScreen";
 import ContactScreen from "../screens/App/ContactScreen";
 import DetailsScreen from "../screens/App/DetailsScreen";
+import AddScreen from "../screens/App/AddScreen";
+import EntryScreen from "../screens/App/EntryScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeStack = ({ navigation }) => (
-  <NativeBaseProvider>
-    <Stack.Navigator>
-      <Stack.Screen
-        name='Social Ledger'
-        component={HomeScreen}
-        options={{
-          headerTitleAlign: "center",
-          headerTitleStyle: {
-            color: textColor,
-            fontSize: 16,
-          },
-          headerStyle: {
-            shadowColor: primaryColor,
-            elevation: 0,
-            backgroundColor: accentColor,
-          },
-          // headerRight: () => (
-          //   <View style={{ marginRight: 10 }}>
-          //     <FontAwesome5 name='plus' size={16} color={textColor} />
-          //   </View>
-          // ),
-        }}
-      />
-      <Stack.Screen
-        name='Contact'
-        component={ContactScreen}
-        options={{
-          title: "",
-          headerTintColor: "white",
-          headerStyle: {
-            shadowColor: primaryColor,
-            elevation: 0,
-            backgroundColor: accentColor,
-          },
-          headerBackTitleVisible: false,
-          headerBackImage: () => (
-            <AntDesign
-              name='left'
-              size={25}
-              color={textColor}
-              style={{ marginLeft: 10 }}
-            />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name='Details'
-        component={DetailsScreen}
-        options={({ route }) => ({
-          title: route.params.title,
-          headerTintColor: "white",
-          headerStyle: {
-            shadowColor: primaryColor,
-            elevation: 0,
-            backgroundColor: accentColor,
-          },
-          headerBackTitleVisible: false,
-          headerBackImage: () => (
-            <AntDesign
-              name='left'
-              size={25}
-              color={textColor}
-              style={{ marginLeft: 10 }}
-            />
-          ),
-        })}
-      />
-      {/* <Stack.Screen
-      name='AddPost'
-      component={AddPostScreen}
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Social Ledger"
+      component={HomeScreen}
       options={{
-        title: "",
         headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#2e64e515",
-          shadowColor: "#2e64e515",
-          elevation: 0,
+        headerTitleStyle: {
+          color: textColor,
+          fontSize: 16,
         },
-        headerBackTitleVisible: false,
-        headerBackImage: () => (
-          <View style={{ marginLeft: 15 }}>
-            <Ionicons name='arrow-back' size={25} color='#2e64e5' />
-          </View>
-        ),
-      }}
-    /> */}
-      {/* <Stack.Screen
-      name='HomeProfile'
-      component={ProfileScreen}
-      options={{
-        title: "",
-        headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: "#fff",
-          shadowColor: "#fff",
+          shadowColor: primaryColor,
           elevation: 0,
+          backgroundColor: accentColor,
         },
-        headerBackTitleVisible: false,
-        headerBackImage: () => (
-          <View style={{ marginLeft: 15 }}>
-            <Ionicons name='arrow-back' size={25} color='#2e64e5' />
-          </View>
-        ),
       }}
-    /> */}
-    </Stack.Navigator>
-  </NativeBaseProvider>
+    />
+  </Stack.Navigator>
 );
 
 const ProfileStack = ({ navigation }) => (
   <Stack.Navigator>
     <Stack.Screen
-      name='Profile'
+      name="Profile"
       component={ProfileScreen}
       options={{
         headerTitleAlign: "center",
@@ -156,7 +74,7 @@ const ProfileStack = ({ navigation }) => (
       }}
     />
     <Stack.Screen
-      name='EditProfile'
+      name="EditProfile"
       component={EditProfileScreen}
       options={{
         headerTitle: "Edit Profile",
@@ -171,25 +89,12 @@ const ProfileStack = ({ navigation }) => (
           elevation: 0,
           backgroundColor: accentColor,
         },
-        // headerLeft:{
-        //    he
-        // }
-        // headerLeft: () => (
-        //   <View style={{ marginLeft: 10 }}>
-        //     <AntDesign
-        //       name='left'
-        //       size={25}
-        //       color={textColor}
-        //       onPress={() => navigation.goBack()}
-        //     />
-        //   </View>
-        // ),
       }}
     />
   </Stack.Navigator>
 );
 
-const AppStack = () => {
+const BottomTabs = () => {
   // colors
   const { colors } = useTheme();
 
@@ -201,24 +106,105 @@ const AppStack = () => {
       }}
     >
       <Tab.Screen
-        name='Home'
+        name="Home"
         component={HomeStack}
         options={() => ({
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name='home' color={color} size={20} />
+            <MaterialCommunityIcons name="home" color={color} size={20} />
           ),
         })}
       />
       <Tab.Screen
-        name='Profile'
+        name="Profile"
         component={ProfileStack}
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name='person' color={color} size={18} />
+            <Ionicons name="person" color={color} size={18} />
           ),
         }}
       />
     </Tab.Navigator>
+  );
+};
+
+const AppStack = () => {
+  return (
+    <NativeBaseProvider>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={BottomTabs}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Contact"
+          component={ContactScreen}
+          options={{
+            title: "",
+            headerTintColor: "white",
+            headerStyle: {
+              shadowColor: primaryColor,
+              elevation: 0,
+              backgroundColor: accentColor,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={({ route }) => ({
+            title: route.params.title,
+            headerTintColor: "white",
+            headerStyle: {
+              shadowColor: primaryColor,
+              elevation: 0,
+              backgroundColor: accentColor,
+            },
+            headerBackTitleVisible: false,
+            headerBackImage: () => (
+              <AntDesign
+                name="left"
+                size={25}
+                color={textColor}
+                style={{ marginLeft: 10 }}
+              />
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Add"
+          component={AddScreen}
+          options={({ route }) => ({
+            title: route.params.name,
+            headerTintColor: "white",
+            headerStyle: {
+              shadowColor: primaryColor,
+              elevation: 0,
+              backgroundColor: accentColor,
+            },
+          })}
+        />
+        <Stack.Screen
+          name="Entry"
+          component={EntryScreen}
+          options={({ route }) => ({
+            title: route.params?.title || "",
+            headerTintColor: "white",
+            headerStyle: {
+              shadowColor: primaryColor,
+              elevation: 0,
+              backgroundColor: accentColor,
+            },
+            headerTitleStyle: {
+              fontSize: 18,
+              color: grayColor,
+            },
+          })}
+        />
+      </Stack.Navigator>
+    </NativeBaseProvider>
   );
 };
 

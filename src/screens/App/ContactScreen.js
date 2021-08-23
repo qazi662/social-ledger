@@ -12,7 +12,7 @@ import { primaryColor, secondaryDark } from "../../assets/colors";
 import SearchForm from "../../components/Home/SearchForm";
 import Item from "../../components/Contact/Item";
 
-const ContactScreen = () => {
+const ContactScreen = (props) => {
   const toast = useToast();
 
   const [list, setList] = useState([]);
@@ -54,13 +54,23 @@ const ContactScreen = () => {
 
   const toggle = (_check) => {};
 
+  const handleClick = (_data) => {
+    props.navigation.navigate("Add", {
+      name: _data.name,
+      number: _data.number,
+    });
+  };
+
   return (
     <Box h="100%" bg={secondaryDark} pt={6} px={4}>
       <SearchForm handleSearch={handleSearch} toggle={toggle} />
       <FlatList
         mt={4}
         data={list}
-        renderItem={({ item }) => <Item data={item} />}
+        initialNumToRender={10}
+        renderItem={({ item }) => (
+          <Item data={item} handleClick={handleClick} />
+        )}
         keyExtractor={(item) => item.id}
       />
     </Box>
