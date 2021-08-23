@@ -1,6 +1,7 @@
 export default {
   customers: [
     {
+      phone: "090078601",
       id: "a3s",
       name: "Amina khan",
       time: "1 day ago",
@@ -21,6 +22,7 @@ export default {
       ],
     },
     {
+      phone: "090078601",
       id: "a2s",
       name: "Shahroon",
       time: "2 day ago",
@@ -28,6 +30,7 @@ export default {
       borrow: true,
     },
     {
+      phone: "090078601",
       id: "bsd3",
       name: "Taimur",
       time: "4 day ago",
@@ -35,6 +38,7 @@ export default {
       borrow: true,
     },
     {
+      phone: "090078601",
       id: "ad32",
       name: "Naveed",
       time: "4 day ago",
@@ -42,6 +46,7 @@ export default {
       borrow: false,
     },
     {
+      phone: "090078601",
       id: "ssdf",
       name: "Hazrat amin",
       time: "4 day ago",
@@ -49,6 +54,7 @@ export default {
       borrow: true,
     },
     {
+      phone: "090078601",
       id: "xvs",
       name: "Jalil",
       time: "5 day ago",
@@ -56,6 +62,7 @@ export default {
       borrow: true,
     },
     {
+      phone: "090078601",
       id: "sdfxc",
       name: "Jalil",
       time: "5 day ago",
@@ -63,6 +70,7 @@ export default {
       borrow: true,
     },
     {
+      phone: "090078601",
       id: "sdfgfhfghsf",
       name: "Jalil",
       time: "5 day ago",
@@ -70,6 +78,7 @@ export default {
       borrow: true,
     },
     {
+      phone: "090078601",
       id: "xvwe",
       name: "Jalil",
       time: "5 day ago",
@@ -77,6 +86,7 @@ export default {
       borrow: true,
     },
     {
+      phone: "090078601",
       id: "xvcxcv",
       name: "Jalil",
       time: "5 day ago",

@@ -58,7 +58,7 @@ const List = ({ trades }) => {
             </Text>
           </Flex>
         )}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => index.toString()}
       />
     </Flex>
   );
