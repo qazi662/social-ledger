@@ -19,8 +19,8 @@ import {
   textColor,
 } from "../assets/colors";
 
-// components
-import { View } from "react-native";
+// Provider
+import { DataProvider } from "../context/UseData";
 
 // screen
 import HomeScreen from "../screens/App/HomeScreen";
@@ -129,82 +129,84 @@ const BottomTabs = () => {
 
 const AppStack = () => {
   return (
-    <NativeBaseProvider>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={BottomTabs}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Contact"
-          component={ContactScreen}
-          options={{
-            title: "",
-            headerTintColor: "white",
-            headerStyle: {
-              shadowColor: primaryColor,
-              elevation: 0,
-              backgroundColor: accentColor,
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
-          options={({ route }) => ({
-            title: route.params.title,
-            headerTintColor: "white",
-            headerStyle: {
-              shadowColor: primaryColor,
-              elevation: 0,
-              backgroundColor: accentColor,
-            },
-            headerBackTitleVisible: false,
-            headerBackImage: () => (
-              <AntDesign
-                name="left"
-                size={25}
-                color={textColor}
-                style={{ marginLeft: 10 }}
-              />
-            ),
-          })}
-        />
-        <Stack.Screen
-          name="Add"
-          component={AddScreen}
-          options={({ route }) => ({
-            title: route.params.name,
-            headerTintColor: "white",
-            headerStyle: {
-              shadowColor: primaryColor,
-              elevation: 0,
-              backgroundColor: accentColor,
-            },
-          })}
-        />
-        <Stack.Screen
-          name="Entry"
-          component={EntryScreen}
-          options={({ route }) => ({
-            title: route.params?.title || "",
-            headerTintColor: "white",
-            headerStyle: {
-              shadowColor: primaryColor,
-              elevation: 0,
-              backgroundColor: accentColor,
-            },
-            headerTitleStyle: {
-              fontSize: 18,
-              color: grayColor,
-            },
-          })}
-        />
-      </Stack.Navigator>
-    </NativeBaseProvider>
+    <DataProvider>
+      <NativeBaseProvider>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={BottomTabs}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Contact"
+            component={ContactScreen}
+            options={{
+              title: "",
+              headerTintColor: "white",
+              headerStyle: {
+                shadowColor: primaryColor,
+                elevation: 0,
+                backgroundColor: accentColor,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Details"
+            component={DetailsScreen}
+            options={({ route }) => ({
+              title: route.params.title,
+              headerTintColor: "white",
+              headerStyle: {
+                shadowColor: primaryColor,
+                elevation: 0,
+                backgroundColor: accentColor,
+              },
+              headerBackTitleVisible: false,
+              headerBackImage: () => (
+                <AntDesign
+                  name="left"
+                  size={25}
+                  color={textColor}
+                  style={{ marginLeft: 10 }}
+                />
+              ),
+            })}
+          />
+          <Stack.Screen
+            name="Add"
+            component={AddScreen}
+            options={({ route }) => ({
+              title: route.params.name,
+              headerTintColor: "white",
+              headerStyle: {
+                shadowColor: primaryColor,
+                elevation: 0,
+                backgroundColor: accentColor,
+              },
+            })}
+          />
+          <Stack.Screen
+            name="Entry"
+            component={EntryScreen}
+            options={({ route }) => ({
+              title: route.params?.title || "",
+              headerTintColor: "white",
+              headerStyle: {
+                shadowColor: primaryColor,
+                elevation: 0,
+                backgroundColor: accentColor,
+              },
+              headerTitleStyle: {
+                fontSize: 18,
+                color: grayColor,
+              },
+            })}
+          />
+        </Stack.Navigator>
+      </NativeBaseProvider>
+    </DataProvider>
   );
 };
 

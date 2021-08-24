@@ -1,5 +1,5 @@
 // libraries
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Box, Flex } from "native-base";
 
@@ -10,6 +10,9 @@ import Cashbook from "../../components/Home/Cashbook";
 import Customers from "../../components/Home/Customers";
 import Fab from "../../components/Home/Fab";
 
+// context
+import DataContext from "../../context/UseData";
+
 // assets
 import { primaryColor } from "../../assets/colors";
 
@@ -17,9 +20,16 @@ import { primaryColor } from "../../assets/colors";
 import mockup from "../../utils/data";
 
 const HomeScreen = ({ navigation, route }) => {
+  const { transcations } = useContext(DataContext);
+
   const [isSearch, setIsSearch] = useState(false);
-  const [customers, setCustomers] = useState(mockup.customers);
-  const [temp] = useState(mockup.customers);
+  const [customers, setCustomers] = useState([]);
+  const [temp, setTemp] = useState([]);
+
+  useEffect(() => {
+    setCustomers(transcations);
+    setTemp(transcations);
+  }, []);
 
   const toggle = (_check) => {
     setIsSearch(_check);

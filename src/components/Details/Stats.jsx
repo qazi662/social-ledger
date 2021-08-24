@@ -26,7 +26,7 @@ const Stats = ({ amount, data }) => {
     if (isAvailable) {
       await SMS.sendSMSAsync(
         [data.phone],
-        `Dear Sir/Madam, Your payment of Rs.${amount} is pending.`,
+        `Dear Sir/Madam, Your payment of Rs.${amount} is pending.`
       );
     } else {
       console.log("No sms available.");
@@ -45,6 +45,11 @@ const Stats = ({ amount, data }) => {
     }
   };
 
+  const convertToStr = () => {
+    let str = amount.toString();
+    return str.replace("-", "");
+  };
+
   return (
     <Flex
       my={3}
@@ -54,27 +59,27 @@ const Stats = ({ amount, data }) => {
       backgroundColor={secondaryDark}
       borderRadius={8}
     >
-      <Flex direction='row' alignItems='center' justifyContent='space-between'>
-        <Text color={textColor} bold fontSize='md'>
+      <Flex direction="row" alignItems="center" justifyContent="space-between">
+        <Text color={textColor} bold fontSize="md">
           You will {amount > 0 ? "get" : "give"}
         </Text>
         <Text
           color={amount > 0 ? deleteColor : successColor}
           fontWeight={600}
-          fontSize='md'
+          fontSize="md"
         >
-          Rs. {amount.toString().replaceAll("-", "")}
+          Rs. {convertToStr()}
         </Text>
       </Flex>
       <Divider my={3} backgroundColor={darkGrayColor} />
-      <Flex direction='row' alignItems='center' justifyContent='space-around'>
+      <Flex direction="row" alignItems="center" justifyContent="space-around">
         <TouchableOpacity disabled={amount < 0} onPress={handeReminderClick}>
           <Flex
             opacity={amount < 0 ? 0.5 : 1}
-            justifyContent='center'
-            alignItems='center'
+            justifyContent="center"
+            alignItems="center"
           >
-            <FontAwesome name='whatsapp' size={25} color={textColor} />
+            <FontAwesome name="whatsapp" size={25} color={textColor} />
             <Text color={textColor} fontSize={12} mt={1}>
               Reminders
             </Text>
@@ -83,11 +88,11 @@ const Stats = ({ amount, data }) => {
         <TouchableOpacity disabled={amount < 0} onPress={handeSmsClick}>
           <Flex
             opacity={amount < 0 ? 0.5 : 1}
-            justifyContent='center'
-            alignItems='center'
+            justifyContent="center"
+            alignItems="center"
           >
             <MaterialCommunityIcons
-              name='android-messages'
+              name="android-messages"
               size={25}
               color={textColor}
             />
