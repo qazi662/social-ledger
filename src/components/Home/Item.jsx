@@ -39,45 +39,45 @@ const Item = ({ data }) => {
         });
       }}
     >
-      <Flex direction='row' my={2}>
+      <Flex direction="row" my={2}>
         <Flex
-          bg='blue.500'
+          bg="blue.500"
           w={12}
           h={12}
           borderRadius={Math.round(windowWidth + windowHeight) / 2}
-          justify='center'
-          alignItems='center'
+          justify="center"
+          alignItems="center"
         >
           <Text color={textColor}>{getFirstChar()}</Text>
         </Flex>
         <Box ml={2} flexGrow={1} pt={1}>
           <Flex
-            direction='row'
-            justify='space-between'
-            alignItems='center'
+            direction="row"
+            justify="space-between"
+            alignItems="center"
             mr={4}
           >
-            <Text color={textColor} fontSize='md' textTransform='capitalize'>
+            <Text color={textColor} fontSize="md" textTransform="capitalize">
               {data.name}
             </Text>
             <Text
               color={!data.borrow ? grayColor : greenColor}
-              fontSize='sm'
-              fontWeight='bold'
+              fontSize="sm"
+              fontWeight="bold"
             >
               Rs {data.amount}
             </Text>
           </Flex>
           <Flex
-            direction='row'
-            justify='space-between'
-            alignItems='center'
+            direction="row"
+            justify="space-between"
+            alignItems="center"
             mr={4}
           >
-            <Text color={textDark} fontSize='sm'>
-              {data.time}
+            <Text color={textDark} fontSize="sm">
+              {data.date.prettier.fromNow}
             </Text>
-            <Text color={textDark} fontSize='sm'>
+            <Text color={textDark} fontSize="sm">
               {data.borrow ? " You'll Give" : "You'll Get"}
             </Text>
           </Flex>

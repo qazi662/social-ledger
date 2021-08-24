@@ -27,9 +27,11 @@ const HomeScreen = ({ navigation, route }) => {
   const [temp, setTemp] = useState([]);
 
   useEffect(() => {
-    setCustomers(transcations);
-    setTemp(transcations);
-  }, []);
+    if (transcations) {
+      setCustomers(transcations);
+      setTemp(transcations);
+    }
+  }, [transcations]);
 
   const toggle = (_check) => {
     setIsSearch(_check);

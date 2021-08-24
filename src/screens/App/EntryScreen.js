@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import { Flex, Box, Button, Text, Input, TextArea, Icon } from "native-base";
 
@@ -17,10 +17,19 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 // component
 import Picker from "../../components/common/Picker";
 
+// context
+import DataContext from "../../context/UseData";
+
+// util
+import { getCurrentDate } from "../../utils/helper";
+
 const EntryScreen = ({ route, navigation }) => {
-  const [amount, setAmount] = useState(0);
-  const [dateValue, setDateValue] = useState(new Date());
+  const { addEntry } = useContext(DataContext);
+
+  const [amount, setAmount] = useState("");
+  const [dateValue, setDateValue] = useState(getCurrentDate());
   const [showCal, setShowCal] = useState(false);
+  const [note, setNote] = useState("");
 
   useEffect(() => {
     let msg =
@@ -29,6 +38,29 @@ const EntryScreen = ({ route, navigation }) => {
         : `You got Rs ${amount} from ${route.params?.name}`;
     navigation.setParams({ title: msg });
   }, [amount]);
+
+  const handleClick = () => {
+    let newEntry = {
+      id: route.params.phoneNumber,
+      amount: parseInt(amount),
+      name: route.params.name,
+      phone: route.params.phoneNumber,
+      borrow: route.params.type === "gave" ? false : true,
+      date: dateValue,
+      note,
+      trades: [
+        {
+          date: dateValue.prettier.date,
+          time: dateValue.prettier.time,
+          amount: parseInt(amount),
+          borrow: route.params.type === "gave" ? false : true,
+        },
+      ],
+    };
+
+    addEntry(newEntry);
+    navigation.navigate("Home");
+  };
 
   return (
     <Flex h="100%" bg={secondaryDark} py={2} px={4} alignItems="flex-start">
@@ -40,7 +72,7 @@ const EntryScreen = ({ route, navigation }) => {
         value={amount}
         onChangeText={(value) => {
           if (value !== "") setAmount(value);
-          else setAmount(0);
+          else setAmount("0");
         }}
         InputLeftElement={
           <Text ml={2} fontSize={18} color={greenColor} fontWeight="600">
@@ -56,6 +88,8 @@ const EntryScreen = ({ route, navigation }) => {
         textAlignVertical="top"
         placeholder="Enter Details (item Name, Bill No, Quantity...)"
         color="white"
+        value={note}
+        onChangeText={(val) => setNote(val)}
       />
       <TouchableOpacity onPress={() => setShowCal(true)}>
         <Flex
@@ -68,12 +102,18 @@ const EntryScreen = ({ route, navigation }) => {
         >
           <Icon as={AntDesign} name="calendar" size={4} color={grayColor} />
           <Text ml={2} mr={1} fontSize="sm" color={grayColor}>
-            23 Aug 21
+            {dateValue.prettier.date}
           </Text>
           <Icon as={Entypo} name="chevron-down" size={3} color={grayColor} />
         </Flex>
       </TouchableOpacity>
-      <Button size="md" bgColor={greenColor} mt="auto" width="100%">
+      <Button
+        size="md"
+        bgColor={greenColor}
+        mt="auto"
+        width="100%"
+        onPress={handleClick}
+      >
         SAVE
       </Button>
       {showCal && (

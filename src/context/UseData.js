@@ -11,10 +11,7 @@ export const DataProvider = ({ children }) => {
   const [transcations, setTranscations] = useState(mockup.customers);
 
   const addEntry = (_data) => {
-    setTranscations({
-      ...transcations,
-      _data,
-    });
+    setTranscations([_data, ...transcations]);
   };
 
   return (

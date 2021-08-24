@@ -1,5 +1,5 @@
 // libs
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 // components
 import { Flex } from "native-base";
@@ -10,15 +10,18 @@ import List from "../../components/Details/List";
 // assets
 import { primaryColor } from "../../assets/colors";
 
-// mockup
-import mockup from "../../utils/data";
+// context
+import DataContext from "../../context/UseData";
 
 const DetailsScreen = ({ route }) => {
+  // context
+  const { transcations } = useContext(DataContext);
+
   // params
   const { id } = route.params;
 
   // states
-  const [data] = useState(mockup.customers.find((item) => item.id == id));
+  const [data, setData] = useState(transcations.find((item) => item.id == id));
   const [amount, setAmount] = useState(0);
 
   // calculate total amount
@@ -38,8 +41,8 @@ const DetailsScreen = ({ route }) => {
   }, [data]);
 
   return (
-    <Flex direction='column' height='100%' backgroundColor={primaryColor}>
-      <Flex flexGrow={1} direction='column'>
+    <Flex direction="column" height="100%" backgroundColor={primaryColor}>
+      <Flex flexGrow={1} direction="column">
         <Stats amount={amount} data={data} />
         <List trades={data.trades} />
       </Flex>

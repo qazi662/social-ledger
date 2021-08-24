@@ -10,6 +10,7 @@ const AddScreen = ({ route, navigation }) => {
     navigation.navigate("Entry", {
       type: _type,
       name: route.params.name,
+      phoneNumber: route.params.number,
     });
   };
 

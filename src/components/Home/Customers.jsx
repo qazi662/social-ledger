@@ -1,5 +1,5 @@
 // libraries
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, FlatList, Text, Icon, Fab } from "native-base";
 
 // components
