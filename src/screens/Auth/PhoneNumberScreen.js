@@ -3,6 +3,7 @@ import React, { useState, useContext } from "react";
 import { View, Image, StyleSheet, ScrollView } from "react-native";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import { useTheme } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // context
 import AuthContext from "../../navigation/AuthProvider";
@@ -34,6 +35,14 @@ const LoginScreen = ({ navigation }) => {
   // ref
   const recaptchaVerifier = React.useRef(null);
 
+  const savePhoneNumber = async (_phone) => {
+    try {
+      await AsyncStorage.setItem("number", _phone);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <View style={styles.main}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -49,28 +58,29 @@ const LoginScreen = ({ navigation }) => {
         <Input
           autoFocus
           labelValue={phone}
-          autoCompleteType='tel'
+          autoCompleteType="tel"
           onChangeText={(e) => setPhone(e)}
-          placeholderText='+1 999 999 999'
-          iconType='phone'
-          textContentType='telephoneNumber'
-          keyboardType='phone-pad'
+          placeholderText="+1 999 999 999"
+          iconType="phone"
+          textContentType="telephoneNumber"
+          keyboardType="phone-pad"
         />
         <Button
           style={styles.button}
           loading={loading}
           color={colors.buttonBackground}
           disabled={!phone}
-          mode='contained'
+          mode="contained"
           onPress={async () => {
             setLoading(true);
             try {
               const phoneProvider = new firebase.auth.PhoneAuthProvider();
               const verificationId = await phoneProvider.verifyPhoneNumber(
                 phone,
-                recaptchaVerifier.current,
+                recaptchaVerifier.current
               );
               setVerificationId(verificationId);
+              savePhoneNumber(phone);
               navigation.navigate("VerificationScreen");
               setLoading(false);
             } catch (err) {

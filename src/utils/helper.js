@@ -30,7 +30,6 @@ export const getCurrentDate = () => {
   let current = moment();
 
   return {
-    current,
     to_date: current.toDate(),
     to_str: current.toString(),
     prettier: {
@@ -45,7 +44,6 @@ export const formatDate = (_date) => {
   let newDate = moment(_date);
 
   return {
-    newDate,
     to_date: newDate.toDate(),
     to_str: newDate.toString(),
     prettier: {
