@@ -68,8 +68,6 @@ export const getOverAll = (_list) => {
   return {
     will_get: getSum,
     will_give: giveSum,
-    getDiff: getSum - giveSum,
-    giveDiff: giveSum - getSum,
   };
 };
 

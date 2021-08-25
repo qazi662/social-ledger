@@ -34,7 +34,7 @@ const ReportCard = ({ transcations }) => {
             Rs {getOverAll(transcations).will_get}
           </Text>
           <Text color={textDark} fontSize="xs">
-            You got
+            You will get
           </Text>
         </Flex>
         <Divider orientation="vertical" bg={accentLight} />
@@ -43,7 +43,7 @@ const ReportCard = ({ transcations }) => {
             Rs {getOverAll(transcations).will_give}
           </Text>
           <Text color={textDark} fontSize="xs">
-            You gave
+            You will give
           </Text>
         </Flex>
       </Flex>

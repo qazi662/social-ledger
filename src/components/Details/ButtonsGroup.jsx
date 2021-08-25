@@ -29,6 +29,10 @@ const ButtonsGroup = ({ data }) => {
     let currentDate = getCurrentDate();
     let newTrade = {
       ...data,
+      amount:
+        method === "gave"
+          ? data.amount + parseInt(amount)
+          : data.amount - parseInt(amount),
       trades: [
         ...data.trades,
         {
