@@ -34,7 +34,7 @@ export const getCurrentDate = () => {
     to_str: current.toString(),
     prettier: {
       date: current.format("DD-MMM-YYYY"),
-      time: current.format("hh:aa a"),
+      time: current.format("hh:mm a"),
       fromNow: current.fromNow(),
     },
   };
@@ -48,8 +48,51 @@ export const formatDate = (_date) => {
     to_str: newDate.toString(),
     prettier: {
       date: newDate.format("DD-MMM-YYYY"),
-      time: newDate.format("hh:aa a"),
+      time: newDate.format("hh:mm a"),
       fromNow: newDate.fromNow(),
     },
   };
+};
+
+export const getOverAll = (_list) => {
+  let getSum = 0;
+  let giveSum = 0;
+
+  _list.forEach((item) => {
+    item.trades.forEach((tradeItem) => {
+      if (!tradeItem.borrow) getSum += tradeItem.amount;
+      else giveSum += tradeItem.amount;
+    });
+  });
+
+  return {
+    will_get: getSum,
+    will_give: giveSum,
+    getDiff: getSum - giveSum,
+    giveDiff: giveSum - getSum,
+  };
+};
+
+export const getTotal = (_list) => {
+  let getSum = 0;
+  let giveSum = 0;
+
+  _list.forEach((item) => {
+    if (!item.borrow) getSum += item.amount;
+    else giveSum += item.amount;
+  });
+
+  return {
+    will_get: getSum,
+    will_give: giveSum,
+    diff: getSum - giveSum,
+  };
+};
+
+export const isExist = (_list, _id) => {
+  for (let i = 0; i < _list.length; i++) {
+    if (_list[i].id === _id) return true;
+  }
+
+  return false;
 };

@@ -10,6 +10,8 @@ import { TouchableOpacity, Share } from "react-native";
 import {
   darkGrayColor,
   deleteColor,
+  grayColor,
+  greenColor,
   secondaryDark,
   successColor,
   textColor,
@@ -64,7 +66,7 @@ const Stats = ({ amount, data }) => {
           You will {amount > 0 ? "get" : "give"}
         </Text>
         <Text
-          color={amount > 0 ? deleteColor : successColor}
+          color={amount > 0 ? grayColor : greenColor}
           fontWeight={600}
           fontSize="md"
         >

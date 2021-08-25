@@ -24,6 +24,12 @@ const DetailsScreen = ({ route }) => {
   const [data, setData] = useState(transcations.find((item) => item.id == id));
   const [amount, setAmount] = useState(0);
 
+  useEffect(() => {
+    if (transcations) {
+      setData(transcations.find((item) => item.id == id));
+    }
+  }, [transcations]);
+
   // calculate total amount
   useEffect(() => {
     if (data.trades) {
@@ -46,7 +52,7 @@ const DetailsScreen = ({ route }) => {
         <Stats amount={amount} data={data} />
         <List trades={data.trades} />
       </Flex>
-      <ButtonsGroup />
+      <ButtonsGroup data={data} />
     </Flex>
   );
 };

@@ -28,6 +28,15 @@ export const DataProvider = ({ children }) => {
     addToFirebase([_data, ...transcations]);
   };
 
+  const updateEntry = (_data) => {
+    let newList = transcations.map((item) =>
+      item.id === _data.id ? _data : item
+    );
+    setTranscations(newList);
+    addToLocal(newList);
+    addToFirebase(newList);
+  };
+
   const addToLocal = async (_transcations) => {
     try {
       await AsyncStorage.setItem("transcations", JSON.stringify(_transcations));
@@ -69,6 +78,7 @@ export const DataProvider = ({ children }) => {
         transcations,
         setTranscations,
         addEntry,
+        updateEntry,
       }}
     >
       {children}

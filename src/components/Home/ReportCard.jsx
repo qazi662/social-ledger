@@ -16,7 +16,10 @@ import {
 // icons
 import { MaterialIcons } from "@expo/vector-icons";
 
-const ReportCard = () => {
+// utils
+import { getOverAll, getTotal } from "../../utils/helper";
+
+const ReportCard = ({ transcations }) => {
   return (
     <Box borderRadius={10} bg={secondaryDark} py={4}>
       <Flex
@@ -28,24 +31,29 @@ const ReportCard = () => {
       >
         <Flex direction="column" justify="center" alignItems="center">
           <Text color={textColor} fontSize="md">
-            Rs 0
+            Rs {getOverAll(transcations).will_get}
           </Text>
           <Text color={textDark} fontSize="xs">
-            You will get
+            You got
           </Text>
         </Flex>
         <Divider orientation="vertical" bg={accentLight} />
         <Flex direction="column" justify="center" alignItems="center">
           <Text color={greenColor} fontSize="md">
-            Rs 8000
+            Rs {getOverAll(transcations).will_give}
           </Text>
           <Text color={textDark} fontSize="xs">
-            You will give
+            You gave
           </Text>
         </Flex>
       </Flex>
-      <Divider bg={accentLight} />
-      <Flex pt={4} direction="row" justify="center" alignItems="center">
+      {/* <Divider bg={accentLight} /> */}
+      {/* <Flex
+        pt={4}
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
         <Text color={textColor} fontWeight={600}>
           VIEW REPORT
         </Text>
@@ -55,7 +63,7 @@ const ReportCard = () => {
           size="sm"
           ml={1}
         />
-      </Flex>
+      </Flex> */}
     </Box>
   );
 };

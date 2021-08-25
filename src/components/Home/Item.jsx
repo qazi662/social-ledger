@@ -21,6 +21,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 // utils
 import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { getTotal } from "../../utils/helper";
 
 const Item = ({ data }) => {
   // navigation
@@ -28,6 +29,11 @@ const Item = ({ data }) => {
 
   const getFirstChar = () => {
     return data.name.charAt(0);
+  };
+
+  const convertToStr = (_amount) => {
+    let str = _amount.toString();
+    return str.replace("-", "");
   };
 
   return (
@@ -61,11 +67,17 @@ const Item = ({ data }) => {
               {data.name}
             </Text>
             <Text
-              color={!data.borrow ? grayColor : greenColor}
+              color={
+                getTotal(data.trades).diff > 0
+                  ? grayColor
+                  : getTotal(data.trades).diff == 0
+                  ? grayColor
+                  : greenColor
+              }
               fontSize="sm"
               fontWeight="bold"
             >
-              Rs {data.amount}
+              Rs {convertToStr(getTotal(data.trades).diff)}
             </Text>
           </Flex>
           <Flex
@@ -77,8 +89,12 @@ const Item = ({ data }) => {
             <Text color={textDark} fontSize="sm">
               {data.date.prettier.fromNow}
             </Text>
-            <Text color={textDark} fontSize="sm">
-              {data.borrow ? " You'll Give" : "You'll Get"}
+            <Text color={grayColor} fontSize="sm" fontWeight="bold">
+              {getTotal(data.trades).diff > 0
+                ? "You will get"
+                : getTotal(data.trades).diff == 0
+                ? ""
+                : "You will give"}
             </Text>
           </Flex>
           <Divider bg={accentLight} mt={4} />

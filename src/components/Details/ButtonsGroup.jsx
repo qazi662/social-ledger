@@ -1,23 +1,48 @@
 // libs
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 // components
 import { Modal, Button, Input } from "native-base";
 
 // assets
-import { deleteColor, successColor } from "../../assets/colors";
+import { deleteColor, secondayLight, successColor } from "../../assets/colors";
 
-const ButtonsGroup = () => {
+// context
+import DataContext from "../../context/UseData";
+
+// util
+import { getCurrentDate } from "../../utils/helper";
+
+const ButtonsGroup = ({ data }) => {
+  const { updateEntry } = useContext(DataContext);
+
   // states
   const [modalVisible, setModalVisible] = useState(false);
   const [method, setMethod] = useState();
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("0");
 
   // ref
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
-  console.log(amount);
+  const handleClick = () => {
+    let currentDate = getCurrentDate();
+    let newTrade = {
+      ...data,
+      trades: [
+        ...data.trades,
+        {
+          date: currentDate.prettier.date,
+          time: currentDate.prettier.time,
+          amount: parseInt(amount),
+          borrow: method === "gave" ? false : true,
+        },
+      ],
+    };
+
+    updateEntry(newTrade);
+    setModalVisible(false);
+  };
 
   return (
     <>
@@ -35,21 +60,19 @@ const ButtonsGroup = () => {
               mt={4}
               ref={initialRef}
               placeholder={`How much money you ${method}?`}
-              keyboardType='numeric'
+              keyboardType="numeric"
               value={amount}
-              onChangeText={(text) => setAmount(text)}
+              onChangeText={(value) => setAmount(value)}
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button.Group variant='ghost' space={2}>
-              <Button onPress={() => alert(`You ${method} Rs.${amount}`)}>
-                SAVE
-              </Button>
+            <Button.Group variant="ghost" space={2}>
+              <Button onPress={handleClick}>SAVE</Button>
               <Button
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}
-                colorScheme='secondary'
+                colorScheme="secondary"
               >
                 CLOSE
               </Button>
@@ -58,7 +81,7 @@ const ButtonsGroup = () => {
         </Modal.Content>
       </Modal>
       <Button.Group
-        variant='solid'
+        variant="solid"
         space={3}
         my={3}
         mx={{
@@ -70,8 +93,8 @@ const ButtonsGroup = () => {
             setModalVisible(true);
             setMethod("gave");
           }}
-          backgroundColor={deleteColor}
-          width='50%'
+          backgroundColor={secondayLight}
+          width="50%"
           flex={1}
         >
           YOU GAVE
@@ -81,7 +104,7 @@ const ButtonsGroup = () => {
             setModalVisible(true);
             setMethod("got");
           }}
-          backgroundColor={successColor}
+          backgroundColor={secondayLight}
           flex={1}
         >
           YOU GOT

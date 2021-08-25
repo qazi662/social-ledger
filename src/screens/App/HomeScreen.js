@@ -68,10 +68,10 @@ const HomeScreen = ({ navigation, route }) => {
             />
           </Box>
           <Box mx={4} mt={0} mb={3} style={isSearch && styles.hide}>
-            <ReportCard />
+            <ReportCard transcations={transcations} />
           </Box>
           <Box mx={4} style={isSearch && styles.hide}>
-            <Cashbook />
+            {/* <Cashbook /> */}
           </Box>
           <Box mt={4} flex={1}>
             <Customers customers={customers} />

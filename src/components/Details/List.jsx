@@ -6,6 +6,8 @@ import moment from "moment";
 import { Flex, Text, FlatList } from "native-base";
 import {
   deleteColor,
+  grayColor,
+  greenColor,
   secondaryDark,
   successColor,
   textColor,
@@ -14,14 +16,14 @@ import {
 const List = ({ trades }) => {
   return (
     <Flex flex={1} mx={3} borderRadius={8}>
-      <Flex direction='row' px={3} py={3}>
+      <Flex direction="row" px={3} py={3}>
         <Text color={textColor} fontSize={12} flex={2}>
           Entries
         </Text>
-        <Text textAlign='center' fontSize={12} color={textColor} flex={1}>
+        <Text textAlign="center" fontSize={12} color={textColor} flex={1}>
           You Gave
         </Text>
-        <Text textAlign='center' fontSize={12} color={textColor} flex={1}>
+        <Text textAlign="center" fontSize={12} color={textColor} flex={1}>
           You Got
         </Text>
       </Flex>
@@ -29,31 +31,26 @@ const List = ({ trades }) => {
         data={trades}
         renderItem={({ item }) => (
           <Flex
-            direction='row'
+            direction="row"
             px={5}
             py={3}
             my={1}
             borderRadius={8}
             backgroundColor={secondaryDark}
-            alignItems='center'
+            alignItems="center"
           >
             <Flex flex={2}>
               <Text color={textColor} fontWeight={600} fontSize={14} mb={2}>
-                {moment().format("DD-MMM-YYYY")}
+                {item.date}
               </Text>
               <Text color={textColor} fontWeight={600} fontSize={14}>
-                {moment().format("hh:mm a")}
+                {item.time}
               </Text>
             </Flex>
-            <Text fontSize={14} textAlign='center' flex={1} color={deleteColor}>
+            <Text fontSize={14} textAlign="center" flex={1} color={grayColor}>
               {!item.borrow && `Rs.${item.amount}`}
             </Text>
-            <Text
-              fontSize={14}
-              textAlign='center'
-              flex={1}
-              color={successColor}
-            >
+            <Text fontSize={14} textAlign="center" flex={1} color={greenColor}>
               {item.borrow && `Rs.${item.amount}`}
             </Text>
           </Flex>

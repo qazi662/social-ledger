@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TouchableOpacity } from "react-native";
-import { Flex, Box, Button, Text, Input, TextArea, Icon } from "native-base";
+import {
+  Flex,
+  Box,
+  Button,
+  Text,
+  Input,
+  TextArea,
+  Icon,
+  useToast,
+} from "native-base";
 
 // colors
 import {
@@ -21,10 +30,11 @@ import Picker from "../../components/common/Picker";
 import DataContext from "../../context/UseData";
 
 // util
-import { getCurrentDate } from "../../utils/helper";
+import { getCurrentDate, isExist } from "../../utils/helper";
 
 const EntryScreen = ({ route, navigation }) => {
-  const { addEntry } = useContext(DataContext);
+  const { transcations, addEntry } = useContext(DataContext);
+  const toast = useToast();
 
   const [amount, setAmount] = useState("");
   const [dateValue, setDateValue] = useState(getCurrentDate());
@@ -58,8 +68,14 @@ const EntryScreen = ({ route, navigation }) => {
       ],
     };
 
-    addEntry(newEntry);
-    navigation.navigate("Home");
+    if (!isExist(transcations, newEntry.id)) {
+      addEntry(newEntry);
+      navigation.navigate("Home");
+    } else {
+      toast.show({
+        title: "Peer already exist, add new entry in Detail Screen",
+      });
+    }
   };
 
   return (
